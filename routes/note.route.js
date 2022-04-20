@@ -3,7 +3,7 @@ const { noteController } = require("../controllers/note.controller");
 const { Router } = require("express");
 
 const router = Router()
-router.post("/getNote", noteController.getNoteByDate)
-router.post("/createNote", noteController.createNote)
+router.post("/get_note", noteController.getNoteByDate)
+router.post("/create_note", noteController.createNote)
 
 module.exports = router

@@ -33,5 +33,5 @@ const noteSchema = new Schema(
   { timestamps: true }
 );
 
-const Note = model("Node", noteSchema);
+const Note = model("Note", noteSchema);
 module.exports = Note;

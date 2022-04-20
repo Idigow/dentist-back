@@ -7,6 +7,7 @@ module.exports.doctorController = {
     const doctor = await Doctor.find();
     res.json(doctor);
   },
+
   getDoctorsId: async (req, res) => {
     const doctor = await Doctor.findById(req.user.id, { password: 0 });
     await res.json(doctor);
@@ -47,14 +48,14 @@ module.exports.doctorController = {
     const candidate = await Doctor.findOne({ login });
     if (!candidate) {
       return res.status(401).json({
-        error: "Неверный данные (login)",
+        error: "Неверный логин или пароль!",
       });
     }
 
     const valid = await bcrypt.compare(password.toString(), candidate.password);
     if (!valid) {
       return res.status(401).json({
-        error: "Неверный данные (password)",
+        error: "Неверный логин или пароль!",
       });
     }
 

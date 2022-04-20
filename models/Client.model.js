@@ -16,7 +16,16 @@ const clientSchema = new Schema(
     },
     secondPhoneNumber: {
       type: String
-    }
+    },
+    birthday: {
+      type: String
+    },
+    email: {
+      type: String
+    },
+    gender: {
+      type: String
+    },
   },
   { timestamps: true }
 );
