@@ -15,13 +15,23 @@ module.exports.doctorController = {
 
   register: async (req, res) => {
     try {
-      const { name, login, password } = req.body;
+      const { firstName, lastName, fathersName, phoneNumber, secondPhoneNumber, birthday, email, gender, salary, speciality, percent, login, password } = req.body;
       const hash = await bcrypt.hash(
         password.toString(),
         Number(process.env.BCRYPT_ROUNDS)
       );
       const doctor = await Doctor.create({
-        name: name,
+        firstName: firstName,
+        lastName: lastName,
+        fathersName: fathersName,
+        phoneNumber: phoneNumber,
+        secondPhoneNumber: secondPhoneNumber,
+        birthday: birthday,
+        email: email,
+        gender: gender,
+        salary: salary,
+        speciality: speciality,
+        percent: percent,
         login: login,
         password: hash,
       });

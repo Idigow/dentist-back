@@ -4,9 +4,11 @@ const ServiceSchema = new Schema(
   {
     service: {
       type: String,
+      required: true,
     },
     price: {
       type: Number,
+      required: true,
     },
   },
   { timestamps: true }
