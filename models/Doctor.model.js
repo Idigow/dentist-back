@@ -15,29 +15,26 @@ const doctorSchema = new Schema(
     },
     phoneNumber: {
       type: String,
-      required: true,
+      // required: true,
     },
     secondPhoneNumber: {
       type: String,
     },
     birthday: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
-      required: true,
     },
     gender: {
       type: String,
-      required: true,
     },
     salary: {
       type: String,
     },
     speciality: {
       type: Array,
-      required: true,
+      // required: true,
     },
     percent: {
       type: String,
@@ -53,7 +50,7 @@ const doctorSchema = new Schema(
     },
     role: {
       type: String,
-      required: true
+      //required: true
     },
     color:{
       type: String,

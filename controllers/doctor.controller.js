@@ -8,6 +8,12 @@ module.exports.doctorController = {
     res.json(doctor);
   },
 
+  getDoctorForDirector: async (req, res) => {
+    const { id } = req.params
+    const doctor = await Doctor.findById(id);
+    res.json(doctor);
+  },
+
   getDoctorsId: async (req, res) => {
     const doctor = await Doctor.findById(req.user.id, { password: 0 });
     await res.json(doctor);
@@ -15,7 +21,21 @@ module.exports.doctorController = {
 
   register: async (req, res) => {
     try {
-      const { firstName, lastName, fathersName, phoneNumber, secondPhoneNumber, birthday, email, gender, salary, speciality, percent, login, password } = req.body;
+      const {
+        firstName,
+        lastName,
+        fathersName,
+        phoneNumber,
+        secondPhoneNumber,
+        birthday,
+        email,
+        gender,
+        salary,
+        speciality,
+        percent,
+        login,
+        password
+      } = req.body;
       const hash = await bcrypt.hash(
         password.toString(),
         Number(process.env.BCRYPT_ROUNDS)
@@ -82,5 +102,18 @@ module.exports.doctorController = {
       token: token,
       role: candidate.role,
     });
+  },
+
+  deleteDoctor: async (req, res) => {
+    try {
+      const { id } = req.params;
+      await Doctor.findByIdAndDelete(id);
+      const doctor = await Doctor.find();
+      res.json(doctor);
+    } catch (e) {
+      return res.status(400).json({
+        error: "Ошибка при удалении Доктора " + e.toString(),
+      });
+    }
   },
 };

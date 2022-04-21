@@ -2,10 +2,10 @@ const { clientController } = require("../controllers/clients.controller");
 const { Router } = require("express");
 
 const router = Router();
-router.get("/clients", clientController.getAllClients);
-router.get("/client/:id", clientController.getClientById);
-router.post("/create/client", clientController.createClient);
-router.delete("/remove_client/:id", clientController.deleteClient)
-router.patch("/update_client/:id", clientController.patchClient)
+router.get("/get_list", clientController.getAllClients);
+router.get("/:id", clientController.getClientById);
+router.post("/create", clientController.createClient);
+router.delete("/delete/:id", clientController.deleteClient)
+router.patch("/edit/:id", clientController.patchClient)
 
 module.exports =  router;

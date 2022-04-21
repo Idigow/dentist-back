@@ -17,6 +17,12 @@ const AdminSchema = new Schema(
             type: String,
             required: true,
         },
+        phoneNumber: {
+            type: String,
+        },
+        secondPhoneNumber: {
+            type: String
+        },
         login: {
             type: String,
             required: true,
@@ -25,6 +31,10 @@ const AdminSchema = new Schema(
             type: String,
             required: true,
         },
+        role: {
+            type: String,
+            required: true
+        }
     },
     { timestamps: true }
 );

@@ -1,14 +1,17 @@
 const Client = require("../models/Client.model");
 
 module.exports.clientController = {
+
   getAllClients: async (req, res) => {
     const users = await Client.find();
     res.json(users);
   },
+
   getClientById: async (req, res) => {
-    const user = await Client.findById(req.user.id);
+    const user = await Client.findById(req.params.id);
     await res.json(user);
   },
+
   createClient: async (req, res) => {
     try {
       const {
@@ -32,6 +35,7 @@ module.exports.clientController = {
       });
     }
   },
+
   deleteClient: async (req, res) => {
     try {
       const { id } = req.params;
@@ -43,6 +47,7 @@ module.exports.clientController = {
       });
     }
   },
+
   patchClient: async (req, res) => {
     try {
       const { id } = req.params;
@@ -73,4 +78,5 @@ module.exports.clientController = {
       });
     }
   },
+
 };

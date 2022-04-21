@@ -1,12 +1,21 @@
 const Service = require("../models/Service.model");
-const Client = require("../models/Client.model");
 
 module.exports.serviceController = {
+
   getService: async (req, res) => {
     const services = await Service.find();
 
     await res.json(services);
   },
+
+  getServiceById: async (req, res) => {
+    const { id } = req.params
+
+    const services = await Service.findById(id);
+
+    await res.json(services);
+  },
+
   createService: async (req, res) => {
     const { service, price } = req.body;
 
@@ -18,6 +27,7 @@ module.exports.serviceController = {
 
     await res.json(services);
   },
+
   removeServices: async (req, res) => {
     const { id } = req.params;
 
@@ -27,6 +37,7 @@ module.exports.serviceController = {
 
     await res.json(services);
   },
+
   editServices: async (req, res) => {
     const { id } = req.params;
     const { service, price } = req.body;
