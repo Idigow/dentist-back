@@ -14,7 +14,7 @@ module.exports.doctorController = {
     res.json(doctor);
   },
 
-  getDoctorsId: async (req, res) => {
+  getDoctorById: async (req, res) => {
     const doctor = await Doctor.findById(req.user.id, { password: 0 });
     await res.json(doctor);
   },
@@ -33,6 +33,7 @@ module.exports.doctorController = {
         salary,
         speciality,
         percent,
+        color,
         login,
         password
       } = req.body;
@@ -50,6 +51,7 @@ module.exports.doctorController = {
         email: email,
         gender: gender,
         salary: salary,
+        color: color,
         speciality: speciality,
         percent: percent,
         login: login,
@@ -108,12 +110,33 @@ module.exports.doctorController = {
     try {
       const { id } = req.params;
       await Doctor.findByIdAndDelete(id);
-      const doctor = await Doctor.find();
-      res.json(doctor);
+      res.status(200).json({
+        message: "Удаление прошло успешно",
+        success: true
+      });
     } catch (e) {
       return res.status(400).json({
         error: "Ошибка при удалении Доктора " + e.toString(),
       });
     }
   },
+
+  editDoctor: async (req,res) => {
+    try {
+      const { id } = req.params;
+      const body = req.body
+      const doctor = await Doctor.findByIdAndUpdate(
+          id,
+          {
+          ...body
+          },
+          { new: true }
+      )
+      res.json(doctor)
+    } catch (e) {
+      return res.status(400).json({
+        error: "Ошибка при изменении Доктора " + e.toString(),
+      });
+    }
+  }
 };

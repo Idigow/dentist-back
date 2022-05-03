@@ -19,12 +19,10 @@ module.exports.serviceController = {
   createService: async (req, res) => {
     const { service, price } = req.body;
 
-    await Service.create({
+    const services = await Service.create({
       service,
       price,
     });
-    const services = await Service.find();
-
     await res.json(services);
   },
 
@@ -40,19 +38,14 @@ module.exports.serviceController = {
 
   editServices: async (req, res) => {
     const { id } = req.params;
-    const { service, price } = req.body;
-
-    await Service.findByIdAndUpdate(
+    const body = req.body;
+    const services = await Service.findByIdAndUpdate(
       id,
       {
-        service,
-        price,
+        ...body
       },
       { new: true }
     );
-
-    const services = await Service.find();
-
     await res.json(services);
   },
 };

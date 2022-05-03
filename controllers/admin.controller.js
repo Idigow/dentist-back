@@ -1,11 +1,23 @@
 const Admin = require("../models/Admin.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Doctor = require("../models/Doctor.model");
 
 module.exports.adminController = {
     getAdminList: async (req,res) => {
         const admin = await Admin.find();
         res.json(admin);
+    },
+
+    getAdminForDirector: async (req, res) => {
+        const { id } = req.params
+        const admin = await Doctor.findById(id);
+        res.json(admin);
+    },
+
+    getAdminById: async (req, res) => {
+        const admin = await Doctor.findById(req.user.id, { password: 0 });
+        await res.json(admin);
     },
 
     register: async (req, res) => {
@@ -87,4 +99,38 @@ module.exports.adminController = {
             role: candidate.role,
         });
     },
+
+    deleteAdmin: async (req, res) => {
+        try {
+            const { id } = req.params;
+            await Admin.findByIdAndDelete(id);
+            res.status(200).json({
+                message: "Удаление прошло успешно",
+                success: true
+            });
+        } catch (e) {
+            return res.status(400).json({
+                error: "Ошибка при удалении Админа " + e.toString(),
+            });
+        }
+    },
+
+    editAdmin: async (req,res) => {
+        try {
+            const { id } = req.params;
+            const body = req.body
+            const admin = await Admin.findByIdAndUpdate(
+                id,
+                {
+                    ...body
+                },
+                { new: true }
+            )
+            res.json(admin)
+        } catch (e) {
+            return res.status(400).json({
+                error: "Ошибка при изменении Админа " + e.toString(),
+            });
+        }
+    }
 }
