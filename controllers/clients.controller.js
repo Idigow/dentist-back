@@ -20,6 +20,9 @@ module.exports.clientController = {
         fathersName,
         phoneNumber,
         secondPhoneNumber,
+        email,
+        gender,
+        birthday
       } = req.body;
       const client = await Client.create({
         firstName,
@@ -27,6 +30,9 @@ module.exports.clientController = {
         fathersName,
         phoneNumber,
         secondPhoneNumber,
+        email,
+        gender,
+        birthday
       });
       await res.json(client);
     } catch (e) {
@@ -58,6 +64,9 @@ module.exports.clientController = {
         fathersName,
         phoneNumber,
         secondPhoneNumber,
+        email,
+        gender,
+        birthday
       } = req.body;
 
       const client = await Client.findByIdAndUpdate(
@@ -68,6 +77,9 @@ module.exports.clientController = {
           fathersName,
           phoneNumber,
           secondPhoneNumber,
+          email,
+          gender,
+          birthday
         },
         { new: true }
       );
