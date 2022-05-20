@@ -2,31 +2,29 @@ const { Schema, model } = require("mongoose");
 
 const noteSchema = new Schema(
   {
-    entry: {
+      recordType: {
       type: String,
     },
     doctor: {
-      // type: Schema.Types.ObjectId,
-      // ref: "Doctor",
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Doctor",
       required: true,
     },
-    client: {
-      // type: Schema.Types.ObjectId,
-      // ref: "Client",
-      type: String,
+    patient: {
+      type: Schema.Types.ObjectId,
+      ref: "Client",
       required: true,
     },
-    date: {
+    visitDate: {
       type: String,
     },
-    price: {
+    visitTime: {
+        type: String,
+    },
+    duration: {
       type: String,
     },
-    teeth: {
-      type: String,
-    },
-    diagnosis: {
+    status: {
       type: String,
     },
   },

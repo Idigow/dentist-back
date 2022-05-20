@@ -11,12 +11,12 @@ module.exports.adminController = {
 
     getAdminForDirector: async (req, res) => {
         const { id } = req.params
-        const admin = await Doctor.findById(id);
+        const admin = await Admin.findById(id);
         res.json(admin);
     },
 
     getAdminById: async (req, res) => {
-        const admin = await Doctor.findById(req.user.id, { password: 0 });
+        const admin = await Admin.findById(req.user.id, { password: 0 });
         await res.json(admin);
     },
 
